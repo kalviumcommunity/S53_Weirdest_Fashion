@@ -3,9 +3,7 @@ const router = express.Router()
 const { getAllCollections, getOneCollection, createCollection, updateAllCollections, updateOneCollection, deleteCollection
 } = require('../Controllers/controllers')
 
-router.get('/',(req,res)=>{
-    res.status(200).json({"message": "See all Collections"})
-})
+router.get('/',getAllCollections)
 
 router.get('/:id',getOneCollection)
 
