@@ -82,7 +82,7 @@ const updateOneCollection = asyncHandler(async (req, res) => {
 
 const deleteCollection = asyncHandler(async (req, res) => {
     try {
-        const deleteCollection = await mongooseModel.findByIdandDelete(req.params.id)
+        const deleteCollection = await mongooseModel.findByIdAndDelete(req.params.id)
         if(!deleteCollection){
             res.status(200).json({ message: `Delete Collection for ${req.params.id}`,deleteCollection });
         }
