@@ -11,7 +11,6 @@ import {
 import sideImage from "./../assets/sideimage.png";
 import mainBG from "./../assets/main-bg-ASAP.png";
 import Theme from "./Theme";
-import CardSlider from "./CardSlider";
 import Footer from "./Footer";
 const Home = () => {
   return (
@@ -75,7 +74,6 @@ const Home = () => {
           weird and wonderful world of fashion.
         </Text>
       </Box>
-      <CardSlider />
       <Footer />
     </div>
   );
