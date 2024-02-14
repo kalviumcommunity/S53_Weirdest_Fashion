@@ -1,23 +1,27 @@
 import React from "react";
 import { Box, Text, Flex, Image, Link, Button } from "@chakra-ui/react";
-import Logo from "./../assets/Weird-WardrobeLogo.png";
+import Logo from "./../assets/Weird-WardrobeLogo.png"; // Importing logo image
 
 const Navbar = () => {
   return (
     <>
+      {/* Header section with welcome message */}
       <Box backgroundColor="#BE9B85" pt={1.5} pb={1.5}>
         <Text fontFamily="welcomeFont" textAlign="center" color="white">
           WELCOME TO WEIRD WARDROBE !!
         </Text>
       </Box>
+      {/* Navbar section */}
       <Flex pt={5} pl={10}>
+        {/* Logo */}
         <Image src={Logo} alt="logo" width={"170px"} height={"28px"} mr={260} />
+        {/* Navigation links */}
         <Box
           mr={240}
           color="#BE9B85"
           fontFamily="pages"
           fontSize="sm"
-          display={{ base: "none", md: "block" }}
+          display={{ base: "none", md: "block" }} // Show links only on medium-sized screens and above
           mt={1}
         >
           <Link mr="5">HOME</Link>
@@ -25,6 +29,7 @@ const Navbar = () => {
           <Link mr="5">CONTACT US</Link>
           <Link mr="5">FAVOURITES</Link>
         </Box>
+        {/* Login button */}
         <Button
           backgroundColor="#BE9B85"
           color="white"
