@@ -4,7 +4,6 @@ import {
   Flex,
   Image,
   Text,
-  theme,
   Button,
   Box,
   Center,
@@ -18,16 +17,16 @@ const Home = () => {
   return (
     <div>
       <Navbar />
-      <Flex width="100%" backgroundImage={mainBG} mt={3}>
+      <Flex width="100%" backgroundImage={mainBG} mt={4}>
         <Image
           src={sideImage}
           alt="sideImage"
-          width={285}
+          width={300}
           pt={5}
-          ml={150}
-          mb={6}
+          ml={200}
+          my={6}
         />
-        <Flex flexDirection={"column"} alignItems="center" ml={20}>
+        <Flex flexDirection={"column"} alignItems="center" ml={20} mt={10}>
           <Text
             fontFamily="embraceText"
             alignSelf="flex-start"

@@ -17,14 +17,14 @@ const Navbar = () => {
         //   objectFit={"cover"}
           width={"170px"}
           height={'28px'}
-          mr={200}
+          mr={260}
           
         />
         <Box  mr={240} color="#BE9B85" fontFamily='pages' fontSize='sm' display={{ base: "none", md: "block" }} mt={1}>
-          <Link mr="4">HOME</Link>
-          <Link mr="4">ABOUT US</Link>
-          <Link mr="4">CONTACT US</Link>
-          <Link mr="4">FAVOURITES</Link>
+          <Link mr="5">HOME</Link>
+          <Link mr="5">ABOUT US</Link>
+          <Link mr="5">CONTACT US</Link>
+          <Link mr="5">FAVOURITES</Link>
         </Box>
         <Button backgroundColor="#BE9B85" color='white' width={90} height={9} borderRadius={3}>LOGIN</Button>
       </Flex>

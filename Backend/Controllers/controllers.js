@@ -5,7 +5,7 @@ const asyncHandler = require("express-async-handler");
 const getAllCollections = asyncHandler(async (req, res) => {
   try {
     const AllCollection = await mongooseModel.find({});
-    res.status(200).json({ AllCollection });
+    res.status(200).json(AllCollection);
   } catch (error) {
     console.log("error", error);
     res.status(500).json({ message: "Error fetching All Collections" });
@@ -52,7 +52,7 @@ const createCollection = asyncHandler(async (req, res) => {
 
 const updateAllCollections = asyncHandler(async (req, res) => {
   try {
-    const updateCollection = await mongooseModel.findByIdandUpdate(
+    const updateCollection = await mongooseModel.findByIdAndUpdate(
       req.params.id,
       req.body,
       { new: true }
@@ -68,7 +68,7 @@ const updateAllCollections = asyncHandler(async (req, res) => {
 
 const updateOneCollection = asyncHandler(async (req, res) => {
   try {
-    const updateOneCollection = await mongooseModel.findByIdandUpdate(
+    const updateOneCollection = await mongooseModel.findByIdAndUpdate(
       req.params.id,
       req.body,
       { new: true }

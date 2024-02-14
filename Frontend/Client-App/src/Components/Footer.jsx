@@ -1,56 +1,87 @@
-import { Box, Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text, Image } from "@chakra-ui/react";
 import React from "react";
 import Theme from "./Theme";
+import FaceBook from "./../assets/FacebookCircled.png";
+import Instagram from "./../assets/InstagramIcon.png";
+import GooglePlus from "./../assets/GooglePlus.png";
+import Twitter from "./../assets/TwitterCircled.png";
+import Youtube from "./../assets/YouTubeIcon.png";
+import Phone from "./../assets/TelephoneReceiver.png";
+import GmailIcon from "./../assets/GmailIcon.png";
+import CopyrightIcon from "./../assets/CopyrightIcon.png";
 
 const Footer = () => {
   return (
     <>
       <Flex
-        backgroundColor={Theme.colors.secondary[400]}
+        backgroundColor={"#1E1E1E"}
         color={Theme.colors.primary[200]}
-        px={30}
-        py={50}
+        px={10}
+        pt={"70px"}
+        // textAlign=  {"center"}
         textAlign={"left"}
-        gap={20}
+        fontSize={"16px"}
+        gap={"140px"}
+        justifyContent={"center"}
       >
         <Flex flexDirection="column">
           <Heading size={"md"} mb={5}>
             More About Weird Wardrobe
           </Heading>
-          <Text width={310}>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque
-            cumque debitis aspernatur assumenda facere repudiandae a ducimus qui
-            at nulla, quos autem ipsam sed aliquam tempore neque delectus velit,
-            ut recusandae aperiam maiores. Amet aut mollitia quia, totam,
-            nesciunt aliquam eligendi possimus aliquid, est consectetur cum
-            cupiditate hic. Eaque, dolore.
+          <Text width={290}>
+            Your passport to the unconventional in fashion. At Weird Wardrobe,
+            we take pride in showcasing the most eccentric and out-of-the-box
+            outfits from around the globe.
           </Text>
         </Flex>
         <Flex flexDirection="column">
-          <Heading size={"md"} mb={5}>
+          <Heading
+            size={"md"}
+            mb={5}
+            textAlign={"center"}
+            color={Theme.colors.primary[200]}
+          >
             Stay Connected
           </Heading>
-          <Text width={300}>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sint
-          explicabo facilis id, quis asperiores ipsam esse. Eaque laboriosam
-          beatae quidem quos perferendis neque illum accusamus expedita libero
-          natus enim odio corporis maiores nesciunt obcaecati, nisi sapiente
-          tempore, numquam porro modi repellat quam fugit. Veritatis iusto,
-          commodi excepturi quisquam aspernatur dolor.
-          </Text>
+          <Flex direction={"column"} gap={5}>
+            <Flex alignItems={"center"} gap={6}>
+              <Image src={FaceBook} width={"30px"} height={"30px"} />
+              <Text>Facebook</Text>
+            </Flex>
+            <Flex alignItems={"center"} gap={5}>
+              <Image src={Instagram} width={"30px"} height={"30px"} />
+              <Text>Instagram</Text>
+            </Flex>
+            <Flex alignItems={"center"} gap={6}>
+              <Image src={Twitter} width={"30px"} height={"30px"} />
+              <Text>Twitter</Text>
+            </Flex>
+            <Flex alignItems={"center"} gap={6}>
+              <Image src={GooglePlus} width={"30px"} height={"30px"} />
+              <Text>GooglePlus</Text>
+            </Flex>
+            <Flex alignItems={"center"} gap={6}>
+              <Image src={Youtube} width={"30px"} height={"30px"} />
+              <Text>Youtube</Text>
+            </Flex>
+          </Flex>
         </Flex>
-        <Flex flexDirection="column">
+        <Flex flexDirection="column" gap={6}>
           <Heading size={"md"} mb={5}>
             Contact Information
           </Heading>
-          <Text width={300}>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sint
-          explicabo facilis id, quis asperiores ipsam esse. Eaque laboriosam
-          beatae quidem quos perferendis neque illum accusamus expedita libero
-          natus enim odio corporis maiores nesciunt obcaecati, nisi sapiente
-          tempore, numquam porro modi repellat quam fugit. Veritatis iusto,
-          commodi excepturi quisquam aspernatur dolor.
-          </Text>
+          <Flex gap={6}>
+            <Image src={Phone} width={"25px"} height={"25px"} />
+            <Text>Contact Us</Text>
+          </Flex>
+          <Flex gap={6}>
+            <Image src={GmailIcon} width={"25px"} height={"25px"} />
+            <Text>weirdwardrobe@gmail.com</Text>
+          </Flex>
+          <Flex gap={0} mt={250} mb={5}>
+            <Image src={CopyrightIcon} width={3}/>
+            <Text fontSize={12}>2024 Weird Wardrobe. All rights are reserved | Designed by Megha Wadhwa</Text>
+          </Flex>
         </Flex>
       </Flex>
     </>
