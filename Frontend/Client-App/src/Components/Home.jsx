@@ -1,17 +1,11 @@
 import React from "react";
 import Navbar from "./Navbar";
-import {
-  Flex,
-  Image,
-  Text,
-  Button,
-  Box,
-  Center,
-} from "@chakra-ui/react";
+import { Flex, Image, Text, Button, Box, Center } from "@chakra-ui/react";
 import sideImage from "./../assets/sideimage.png";
 import mainBG from "./../assets/main-bg-ASAP.png";
 import Theme from "./Theme";
 import Footer from "./Footer";
+
 const Home = () => {
   return (
     <div>

@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Text, Image } from "@chakra-ui/react";
+import { Flex, Heading, Text, Image } from "@chakra-ui/react";
 import React from "react";
 import Theme from "./Theme";
 import FaceBook from "./../assets/FacebookCircled.png";
@@ -79,8 +79,11 @@ const Footer = () => {
             <Text>weirdwardrobe@gmail.com</Text>
           </Flex>
           <Flex gap={0} mt={250} mb={5}>
-            <Image src={CopyrightIcon} width={3}/>
-            <Text fontSize={12}>2024 Weird Wardrobe. All rights are reserved | Designed by Megha Wadhwa</Text>
+            <Image src={CopyrightIcon} width={3} />
+            <Text fontSize={12}>
+              2024 Weird Wardrobe. All rights are reserved | Designed by Megha
+              Wadhwa
+            </Text>
           </Flex>
         </Flex>
       </Flex>
