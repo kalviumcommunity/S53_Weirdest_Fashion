@@ -15,7 +15,7 @@ const getAllCollections = asyncHandler(async (req, res) => {
 const getOneCollection = asyncHandler(async (req, res) => {
   try {
     const OneCollection = await mongooseModel.findById(req.params.id);
-    res.status(200).json({ message: `See Collection for ${req.params.id}` });
+    res.status(200).json({ message: `See Collection for ${req.params.id}`,OneCollection });
     if (!OneCollection) {
       return res.status(404).json({ message: "Hacks not found" });
     }
