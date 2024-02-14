@@ -14,7 +14,6 @@ const Navbar = () => {
         <Image
           src={Logo}
           alt="logo"
-        //   objectFit={"cover"}
           width={"170px"}
           height={'28px'}
           mr={260}
