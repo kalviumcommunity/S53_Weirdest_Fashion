@@ -1,5 +1,6 @@
 const express = require('express')
 require('dotenv').config()
+const cors = require('cors')
 const app = express()
 const port = process.env.PORT || 3000
 
@@ -9,7 +10,7 @@ const errorHandler = require('./Middlewares/errorHandler')
 //parse json data while posting
 app.use(express.json())
 app.use(errorHandler)
-
+app.use(cors())
 connectDB()
 
 // app.get("/ping",(req,res)=>{

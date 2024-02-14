@@ -5,7 +5,7 @@ const asyncHandler = require("express-async-handler");
 const getAllCollections = asyncHandler(async (req, res) => {
   try {
     const AllCollection = await mongooseModel.find({});
-    res.status(200).json({ AllCollection });
+    res.status(200).json(AllCollection);
   } catch (error) {
     console.log("error", error);
     res.status(500).json({ message: "Error fetching All Collections" });
@@ -15,7 +15,7 @@ const getAllCollections = asyncHandler(async (req, res) => {
 const getOneCollection = asyncHandler(async (req, res) => {
   try {
     const OneCollection = await mongooseModel.findById(req.params.id);
-    res.status(200).json({ message: `See Collection for ${req.params.id}` });
+    res.status(200).json({ message: `See Collection for ${req.params.id}`,OneCollection });
     if (!OneCollection) {
       return res.status(404).json({ message: "Hacks not found" });
     }
@@ -52,7 +52,7 @@ const createCollection = asyncHandler(async (req, res) => {
 
 const updateAllCollections = asyncHandler(async (req, res) => {
   try {
-    const updateCollection = await mongooseModel.findByIdandUpdate(
+    const updateCollection = await mongooseModel.findByIdAndUpdate(
       req.params.id,
       req.body,
       { new: true }
@@ -68,12 +68,17 @@ const updateAllCollections = asyncHandler(async (req, res) => {
 
 const updateOneCollection = asyncHandler(async (req, res) => {
   try {
-    const updateOneCollection = await mongooseModel.findByIdandUpdate(
+    const updatedOneCollection = await mongooseModel.findByIdAndUpdate(
       req.params.id,
       req.body,
       { new: true }
     );
-    res.status(200).json({ message: `Update Collection for ${req.params.id}`,updateOneCollection });
+    res
+      .status(200)
+      .json({
+        message: `Update Collection for ${req.params.id}`,
+        updatedOneCollection,
+      });
   } catch (error) {
     console.log("error", error);
     res.status(500).json({ message: "Error Updating One Collection" });
@@ -81,15 +86,23 @@ const updateOneCollection = asyncHandler(async (req, res) => {
 });
 
 const deleteCollection = asyncHandler(async (req, res) => {
-    try {
-        const deleteCollection = await mongooseModel.findByIdandDelete(req.params.id)
-        if(!deleteCollection){
-            res.status(200).json({ message: `Delete Collection for ${req.params.id}`,deleteCollection });
-        }
-    } catch (error) {
-        console.log('error', error)
-        res.status(500).json({ message: "Error Deleting Collection" });
+  try {
+    const deleteCollection = await mongooseModel.findByIdAndDelete(
+      req.params.id
+    );
+    if (!deleteCollection) {
+      return res.status(404).json({
+        message: `Collection not found for ${req.params.id}`,
+      });
     }
+    res.status(200).json({
+      message: `Deleted Collection for ${req.params.id}`,
+      deleteCollection,
+    });
+  } catch (error) {
+    console.log("error", error);
+    res.status(500).json({ message: "Error Deleting Collection" });
+  }
 });
 
 module.exports = {
