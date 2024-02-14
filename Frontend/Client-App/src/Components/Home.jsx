@@ -1,22 +1,18 @@
 import React from "react";
-import Navbar from "./Navbar";
-import {
-  Flex,
-  Image,
-  Text,
-  Button,
-  Box,
-  Center,
-} from "@chakra-ui/react";
-import sideImage from "./../assets/sideimage.png";
-import mainBG from "./../assets/main-bg-ASAP.png";
-import Theme from "./Theme";
-import Footer from "./Footer";
+import Navbar from "./Navbar"; // Importing Navbar component
+import { Flex, Image, Text, Button, Box, Center } from "@chakra-ui/react"; // Importing Chakra UI components
+import sideImage from "./../assets/sideimage.png"; // Importing side image
+import mainBG from "./../assets/main-bg-ASAP.png"; // Importing main background image
+import Theme from "./Theme"; // Importing custom theme
+import Footer from "./Footer"; // Importing Footer component
+
 const Home = () => {
   return (
     <div>
-      <Navbar />
+      <Navbar /> {/* Render Navbar component */}
+      {/* Main content section */}
       <Flex width="100%" backgroundImage={mainBG} mt={4}>
+        {/* Side image */}
         <Image
           src={sideImage}
           alt="sideImage"
@@ -25,7 +21,9 @@ const Home = () => {
           ml={200}
           my={6}
         />
+        {/* Text and button section */}
         <Flex flexDirection={"column"} alignItems="center" ml={20} mt={10}>
+          {/* Heading */}
           <Text
             fontFamily="embraceText"
             alignSelf="flex-start"
@@ -37,6 +35,7 @@ const Home = () => {
           >
             Embrace the Eccentricities of Fashion !!
           </Text>
+          {/* Explore button */}
           <Button
             as="i"
             backgroundColor="#BE9B85"
@@ -50,7 +49,9 @@ const Home = () => {
           </Button>
         </Flex>
       </Flex>
+      {/* Secondary content section */}
       <Box>
+        {/* Title */}
         <Center
           mt={20}
           textAlign="center"
@@ -60,6 +61,7 @@ const Home = () => {
         >
           Introducing Weird Wardrobe !!
         </Center>
+        {/* Description */}
         <Text textAlign="center" mx={40} mb={50} mt={10}>
           Your passport to the unconventional in fashion. At Weird Wardrobe, we
           take pride in showcasing the most eccentric and out-of-the-box outfits
@@ -74,6 +76,7 @@ const Home = () => {
           weird and wonderful world of fashion.
         </Text>
       </Box>
+      {/* Render Footer component */}
       <Footer />
     </div>
   );
