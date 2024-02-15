@@ -16,7 +16,7 @@ const Theme = extendTheme({
   // Define custom fonts
   fonts: {
     fonts: {
-      logoFont: "'La Belle Aurore", // Custom font for logos
+      logoFont: "La Belle Aurore", // Custom font for logos
       welcomeFont: "Alegreya", // Custom font for welcome messages
       pages: "PlayFair Display", // Custom font for pages
       embraceText: "Crimson Text", // Custom font for text sections
