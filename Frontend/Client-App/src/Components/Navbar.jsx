@@ -11,6 +11,18 @@ const Navbar = () => {
           WELCOME TO WEIRD WARDROBE !!
         </Text>
       </Box>
+<<<<<<< HEAD
+      <Flex pt={5} pl={10}> 
+        <Image
+          src={Logo}
+          alt="logo"
+          width={"170px"}
+          height={'28px'}
+          mr={260}
+          
+        />
+        <Box  mr={240} color="#BE9B85" fontFamily='pages' fontSize='sm' display={{ base: "none", md: "block" }} mt={1}>
+=======
       {/* Navbar section */}
       <Flex pt={5} pl={10}>
         {/* Logo */}
@@ -24,6 +36,7 @@ const Navbar = () => {
           display={{ base: "none", md: "block" }} // Show links only on medium-sized screens and above
           mt={1}
         >
+>>>>>>> 8fdefb5d113741e996bd57b153af99979a93c698
           <Link mr="5">HOME</Link>
           <Link mr="5">ABOUT US</Link>
           <Link mr="5">CONTACT US</Link>

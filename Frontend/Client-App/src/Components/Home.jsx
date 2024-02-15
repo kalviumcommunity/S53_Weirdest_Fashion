@@ -1,4 +1,19 @@
 import React from "react";
+<<<<<<< HEAD
+import Navbar from "./Navbar";
+import {
+  Flex,
+  Image,
+  Text,
+  Button,
+  Box,
+  Center,
+} from "@chakra-ui/react";
+import sideImage from "./../assets/sideimage.png";
+import mainBG from "./../assets/main-bg-ASAP.png";
+import Theme from "./Theme";
+import Footer from "./Footer";
+=======
 import Navbar from "./Navbar"; // Importing Navbar component
 import { Flex, Image, Text, Button, Box, Center } from "@chakra-ui/react"; // Importing Chakra UI components
 import sideImage from "./../assets/sideimage.png"; // Importing side image
@@ -6,6 +21,7 @@ import mainBG from "./../assets/main-bg-ASAP.png"; // Importing main background 
 import Theme from "./Theme"; // Importing custom theme
 import Footer from "./Footer"; // Importing Footer component
 
+>>>>>>> 8fdefb5d113741e996bd57b153af99979a93c698
 const Home = () => {
   return (
     <div>
@@ -76,7 +92,10 @@ const Home = () => {
           weird and wonderful world of fashion.
         </Text>
       </Box>
+<<<<<<< HEAD
+=======
       {/* Render Footer component */}
+>>>>>>> 8fdefb5d113741e996bd57b153af99979a93c698
       <Footer />
     </div>
   );
