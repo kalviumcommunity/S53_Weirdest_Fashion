@@ -15,9 +15,9 @@ const getAllCollections = asyncHandler(async (req, res) => {
 const getOneCollection = asyncHandler(async (req, res) => {
   try {
     const OneCollection = await mongooseModel.findById(req.params.id);
-    res.status(200).json({ message: `See Collection for ${req.params.id}` });
+    res.status(200).json({ message: `See Collection for ${req.params.id}`,OneCollection });
     if (!OneCollection) {
-      return res.status(404).json({ message: "Hacks not found" });
+      return res.status(404).json({ message: "Collection not found" });
     }
   } catch (error) {
     console.log("error", error);
@@ -68,7 +68,7 @@ const updateAllCollections = asyncHandler(async (req, res) => {
 
 const updateOneCollection = asyncHandler(async (req, res) => {
   try {
-    const updateOneCollection = await mongooseModel.findByIdAndUpdate(
+    const updatedOneCollection = await mongooseModel.findByIdAndUpdate(
       req.params.id,
       req.body,
       { new: true }
@@ -77,7 +77,7 @@ const updateOneCollection = asyncHandler(async (req, res) => {
       .status(200)
       .json({
         message: `Update Collection for ${req.params.id}`,
-        updateOneCollection,
+        updatedOneCollection,
       });
   } catch (error) {
     console.log("error", error);
@@ -91,13 +91,14 @@ const deleteCollection = asyncHandler(async (req, res) => {
       req.params.id
     );
     if (!deleteCollection) {
-      res
-        .status(200)
-        .json({
-          message: `Delete Collection for ${req.params.id}`,
-          deleteCollection,
-        });
+      return res.status(404).json({
+        message: `Collection not found for ${req.params.id}`,
+      });
     }
+    res.status(200).json({
+      message: `Deleted Collection for ${req.params.id}`,
+      deleteCollection,
+    });
   } catch (error) {
     console.log("error", error);
     res.status(500).json({ message: "Error Deleting Collection" });
