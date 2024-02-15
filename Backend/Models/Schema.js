@@ -8,6 +8,6 @@ const collectionSchema = mongoose.Schema({
     "Image_Link": {type: String,required: [true, "Please Add Image Link"]}
 })
 
-const mongooseModel = mongoose.model("Collection", collectionSchema)
+const mongooseModel = mongoose.model("maindatas", collectionSchema)
 
 module.exports = mongooseModel
