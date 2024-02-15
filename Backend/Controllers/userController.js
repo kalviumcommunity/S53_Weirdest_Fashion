@@ -1,6 +1,6 @@
 const { mongo } = require("mongoose");
 const asyncHandler = require("express-async-handler");
-const mongooseUserModel = require("../Models/USerSchema");
+const mongooseUserModel = require("../Models/UserSchema");
 
 const getAllUsers = asyncHandler(async (req, res) => {
   try {
