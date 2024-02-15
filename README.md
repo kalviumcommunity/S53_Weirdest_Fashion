@@ -24,6 +24,6 @@ This project will lead you to diving into a crazy closet, leaving you both amaze
 1. JAVASCRIPT
 1. REACT
 
- # *Backend Deployment Link* - https://s53-weirdest-fashion.onrender.com/
+ ## *Backend Deployment Link* - https://s53-weirdest-fashion.onrender.com/
 
-# * Frontend Deployment Link* - https://client-app-murex.vercel.app/
+## *Frontend Deployment Link* - https://client-app-murex.vercel.app/
