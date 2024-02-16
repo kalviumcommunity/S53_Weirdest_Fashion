@@ -12,6 +12,7 @@ import sideImage from "./../assets/sideimage.png";
 import mainBG from "./../assets/main-bg-ASAP.png";
 import Theme from "./Theme";
 import Footer from "./Footer";
+import CardComponent from "./CardComponent";
 const Home = () => {
   return (
     <div>
@@ -82,6 +83,7 @@ const Home = () => {
           weird and wonderful world of fashion.
         </Text>
       </Box>
+      <CardComponent />
       <Footer />
     </div>
   );
