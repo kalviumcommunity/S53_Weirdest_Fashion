@@ -7,16 +7,24 @@ import {
   Button,
   Box,
   Center,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import sideImage from "./../assets/sideimage.png";
 import mainBG from "./../assets/main-bg-ASAP.png";
 import Theme from "./Theme";
 import Footer from "./Footer";
-import CardComponent from "./CardComponent";
 import CardSlider from "./CardSlider";
+import RecentlyAdded from "./RecentlyAdded";
+
 const Home = () => {
   return (
     <div>
+      {/* Header section with welcome message */}
+      <Box backgroundColor="#BE9B85" pt={1.5} pb={1.5}>
+        <Text fontFamily="welcomeFont" textAlign="center" color="white">
+          WELCOME TO WEIRD WARDROBE !!
+        </Text>
+      </Box>
       <Navbar /> {/* Render Navbar component */}
       {/* Main content section */}
       <Flex width="100%" backgroundImage={mainBG} mt={4}>
@@ -44,17 +52,28 @@ const Home = () => {
             Embrace the Eccentricities of Fashion !!
           </Text>
           {/* Explore button */}
-          <Button
-            as="i"
-            backgroundColor="#BE9B85"
-            color="white"
-            width={120}
-            height={9}
-            borderRadius={3}
-            mt={"40px"}
-          >
-            Explore More...
-          </Button>
+          <Flex gap={10}>
+            <Button
+              as="i"
+              backgroundColor="#BE9B85"
+              color="white"
+              width={120}
+              height={9}
+              borderRadius={3}
+              mt={"40px"}
+              _hover={{
+                color: "white",
+                bg: "#dab9a9",
+                borderColor: "#dab9a9",
+                boxShadow: useColorModeValue(
+                  "0px 0.25rem 0.75rem 0px rgb((203,155,133) / 26%)",
+                  "0px 0.25rem 0.75rem 0px rgb((203,155,133) / 26%)"
+                ),
+              }}
+            >
+              Explore More...
+            </Button>
+          </Flex>
         </Flex>
       </Flex>
       {/* Secondary content section */}
@@ -84,6 +103,7 @@ const Home = () => {
           weird and wonderful world of fashion.
         </Text>
       </Box>
+      <RecentlyAdded />
       <CardSlider />
       <Footer />
     </div>

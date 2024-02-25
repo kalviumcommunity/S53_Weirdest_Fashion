@@ -29,14 +29,13 @@ const createCollection = asyncHandler(async (req, res) => {
   try {
     const body = req.body;
     console.log("body", body);
-    const { Id, Name, Event, Date_Of_Event, Description, Image_Link } = body;
+    const {Name, Event, Date_Of_Event, Description, Image_Link } = body;
 
     if (!Name || !Event || !Date_Of_Event || !Description || !Image_Link) {
       res.status(400).json({ error: "All Fields are Mandatory" });
       throw new Error("All Fields are Mandatory");
     }
     const postCollection = await mongooseModel.create({
-      Id,
       Name,
       Event,
       Date_Of_Event,
