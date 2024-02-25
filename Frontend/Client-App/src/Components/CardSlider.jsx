@@ -22,7 +22,7 @@ const CardSlider = () => {
     axios
       .get("https://s53-weirdest-fashion.onrender.com/api/Collections")
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         setData(res.data);
       })
       .catch((err) => console.log(err));
@@ -40,11 +40,9 @@ const CardSlider = () => {
       </Center>
       <Flex flexWrap={"wrap"} justifyContent={"center"} gap={"50px"}>
       {data
-        .sort((e) => {
-          return (e._id = -1);
-        })
+        .sort((a, b) => b._id - a._id)
         .map((e, i) => {
-          return <CardComponent e={e} key={i} />;
+          return <CardComponent e={e} key={i}/>;
         })}
       </Flex>
     </>
