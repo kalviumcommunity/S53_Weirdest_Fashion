@@ -23,7 +23,7 @@ const RecentlyAdded = () => {
         </Center>
         <Flex flexWrap={"wrap"} justifyContent={"center"} gap={"50px"}>
           {data
-            .sort((a, b) => b._id - a._id)
+            .reverse()
             .slice(0, 3)
             .map((e, i) => {
               return <CardComponent e={e} key={i} />;

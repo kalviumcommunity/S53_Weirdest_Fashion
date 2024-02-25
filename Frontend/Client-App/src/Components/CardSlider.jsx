@@ -40,7 +40,7 @@ const CardSlider = () => {
       </Center>
       <Flex flexWrap={"wrap"} justifyContent={"center"} gap={"50px"}>
       {data
-        .sort((a, b) => b._id - a._id)
+        .reverse()
         .map((e, i) => {
           return <CardComponent e={e} key={i}/>;
         })}
