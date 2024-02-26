@@ -6,6 +6,7 @@ import NewPost from './NewPost'
 import Favourites from './Favourites'
 import ContactUs from './ContactUs'
 import AboutUs from './AboutUs'
+import Login from './Login'
 
 
 const AllRoutes = () => {
@@ -17,6 +18,8 @@ const AllRoutes = () => {
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/favourites" element={<Favourites />} />
         <Route path="/newpost" element={<NewPost />} />
+        <Route path="/login" element={<Login />} />
+
         </Routes>
     </Box>
   )

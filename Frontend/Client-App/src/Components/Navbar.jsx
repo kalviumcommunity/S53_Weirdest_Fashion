@@ -32,6 +32,7 @@ const Navbar = () => {
           LOGIN
         </Button> */}
         {/* #A17272 */}
+        <Link href="/login">
         <Button
           color="white"
           bg="#BE9B85"
@@ -50,6 +51,7 @@ const Navbar = () => {
         >
           LOGIN
         </Button>
+        </Link>
       </Flex>
     </>
   );
