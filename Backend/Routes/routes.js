@@ -1,18 +1,26 @@
-const express = require('express')
-const router = express.Router()
-const { getAllCollections, getOneCollection, createCollection, updateAllCollections, updateOneCollection, deleteCollection
-} = require('../Controllers/controllers')
+const express = require("express");
+const router = express.Router();
+const {
+  getAllCollections,
+  getOneCollection,
+  createCollection,
+  updateAllCollections,
+  updateOneCollection,
+  deleteCollection,
+} = require("../Controllers/controllers");
 
-router.get('/',getAllCollections)
 
-router.get('/:id',getOneCollection)
 
-router.post('/', createCollection)
+router.get("/", getAllCollections);
 
-router.put('/:id', updateAllCollections)
+router.get("/:id", getOneCollection);
 
-router.patch('/:id',updateOneCollection)
+router.post("/", createCollection);
 
-router.delete('/:id', deleteCollection)
+router.put("/:id", updateAllCollections);
 
-module.exports = router
+router.patch("/:id", updateOneCollection);
+
+router.delete("/:id", deleteCollection);
+
+module.exports = router;
