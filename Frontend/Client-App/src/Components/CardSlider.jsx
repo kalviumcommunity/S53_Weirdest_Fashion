@@ -1,19 +1,28 @@
-import React, { useState, useEffect } from "react";
-import { Flex, Center } from "@chakra-ui/react";
+import React, { useState, useEffect, useContext } from "react";
+import { Flex, Center, Image } from "@chakra-ui/react";
 import Theme from "./Theme";
 import CardComponent from "./CardComponent";
 import axios from "axios";
+import { AppContext } from "../Context/ParentContext";
+// import Slider from "react-slick";
+// import 'slick-carousel/slick/slick.css';
+// import 'slick-carousel/slick/slick-theme.css';
+// import Card2 from "./../assets/Card2.jpg";
 
-console.log(import.meta.env);
+// console.log(import.meta.env);
 
 const CardSlider = () => {
-  const [data, setData] = useState([]);
+  const {data,setData} = useContext(AppContext)
+  console.log('data2', data)
+
+  // const [data,setData] = useState([])
+
 
   useEffect(() => {
     axios
       .get("https://s53-weirdest-fashion.onrender.com/api/Collections")
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setData(res.data);
       })
       .catch((err) => console.log(err));
@@ -27,10 +36,14 @@ const CardSlider = () => {
         mt={"100px"}
         mb={"40px"}
       >
-        Exploring Collection
+        Explore Collection
       </Center>
       <Flex flexWrap={"wrap"} justifyContent={"center"} gap={"50px"}>
-        {data.map((e, i) => {
+      {data
+        .sort((e) => {
+          return (e._id = -1);
+        })
+        .map((e, i) => {
           return <CardComponent e={e} key={i} />;
         })}
       </Flex>
@@ -39,5 +52,3 @@ const CardSlider = () => {
 };
 
 export default CardSlider;
-
-

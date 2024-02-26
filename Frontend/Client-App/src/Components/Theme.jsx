@@ -21,6 +21,8 @@ const Theme = extendTheme({
       pages: "PlayFair Display", // Custom font for pages
       embraceText: "Crimson Text", // Custom font for text sections
       explore: "Lato", // Custom font for exploration sections
+      italian: "Italianno",
+      Kota: "Kotta One",
     },
   },
 });
