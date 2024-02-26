@@ -1,6 +1,8 @@
 const { mongo } = require("mongoose");
 const mongooseModel = require("../Models/Schema");
 const asyncHandler = require("express-async-handler");
+const DataSchema = require("./../server");
+const { DataValidationSchema } = require("../userValidation");
 
 const getAllCollections = asyncHandler(async (req, res) => {
   try {
@@ -15,7 +17,9 @@ const getAllCollections = asyncHandler(async (req, res) => {
 const getOneCollection = asyncHandler(async (req, res) => {
   try {
     const OneCollection = await mongooseModel.findById(req.params.id);
-    res.status(200).json({ message: `See Collection for ${req.params.id}`,OneCollection });
+    res
+      .status(200)
+      .json({ message: `See Collection for ${req.params.id}`, OneCollection });
     if (!OneCollection) {
       return res.status(404).json({ message: "Collection not found" });
     }
@@ -27,22 +31,26 @@ const getOneCollection = asyncHandler(async (req, res) => {
 
 const createCollection = asyncHandler(async (req, res) => {
   try {
-    const body = req.body;
-    console.log("body", body);
-    const {Name, Event, Date_Of_Event, Description, Image_Link } = body;
-
-    if (!Name || !Event || !Date_Of_Event || !Description || !Image_Link) {
-      res.status(400).json({ error: "All Fields are Mandatory" });
-      throw new Error("All Fields are Mandatory");
-    }
-    const postCollection = await mongooseModel.create({
-      Name,
-      Event,
-      Date_Of_Event,
-      Description,
-      Image_Link,
+    const { error, value } = DataValidationSchema.validate(req.body, {
+      abortEarly: false,
     });
-    res.status(201).json({ message: "Create Collection", postCollection });
+    if (error) {
+      console.log(error)
+      const allErrors = error.details.map(e=>e.message)
+      res.status(400).json({ error: allErrors });
+    } else {
+      console.log(value);
+      const { Name, Event, Date_Of_Event, Description, Image_Link } = value;
+
+      const postCollection = await mongooseModel.create({
+        Name,
+        Event,
+        Date_Of_Event,
+        Description,
+        Image_Link,
+      });
+      res.status(201).json({ message: "Create Collection", postCollection });
+    }
   } catch (error) {
     console.log("error", error);
     res.status(500).json({ message: "Error creating new Collection" });
@@ -72,12 +80,10 @@ const updateOneCollection = asyncHandler(async (req, res) => {
       req.body,
       { new: true }
     );
-    res
-      .status(200)
-      .json({
-        message: `Update Collection for ${req.params.id}`,
-        updatedOneCollection,
-      });
+    res.status(200).json({
+      message: `Update Collection for ${req.params.id}`,
+      updatedOneCollection,
+    });
   } catch (error) {
     console.log("error", error);
     res.status(500).json({ message: "Error Updating One Collection" });
