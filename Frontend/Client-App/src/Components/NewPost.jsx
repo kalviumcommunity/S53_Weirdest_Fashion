@@ -19,8 +19,10 @@ import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from 'axios'
+import {useNavigate} from 'react-router-dom'
 
 const NewPost = () => {
+  const Navigate = useNavigate()
   const {
     register,
     handleSubmit,
@@ -31,8 +33,8 @@ const NewPost = () => {
   } = useForm();
 
   const FormSubmitHandler = (data) => {
-    console.log("data: ", data);
-    console.log("errors", errors);
+    // console.log("data: ", data);
+    // console.log("errors", errors);
     trigger();
     toastHandler();
     PostRequest(data)
@@ -44,8 +46,7 @@ const NewPost = () => {
       const res = await axios.post('https://s53-weirdest-fashion.onrender.com/api/Collections',{
         ...data,
       })
-      // res.json()
-      console.log('res', res)
+      // console.log('post-response', res)
     } catch (error) {
       console.log('error', error)
       
@@ -65,6 +66,9 @@ const NewPost = () => {
         progress: undefined,
         theme: "dark",
       });
+      setTimeout(()=>{
+        Navigate('/')
+      },5000)
     } else if (isSubmitted && !isSubmitSuccessful) {
       for (const errorKey in errors) {
         const errorMessage = errors[errorKey]?.message;
@@ -79,7 +83,7 @@ const NewPost = () => {
             progress: undefined,
             theme: "dark",
           });
-          console.log("errorKey", errorKey);
+          // console.log("errorKey", errorKey);
         }
       }
     }
@@ -89,11 +93,6 @@ const NewPost = () => {
     toastHandler();
   }, [isSubmitted]);
 
-  // useEffect(()=>{
-  //   axios.post('https://s53-weirdest-fashion.onrender.com/api/Collections',{
-  //     ...data,
-  //   })
-  // })
 
   return (
     <Box>
