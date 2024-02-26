@@ -8,7 +8,7 @@ import { wrap } from "framer-motion";
 const RecentlyAdded = () => {
   const { data, setData } = useContext(AppContext);
 
-  console.log("data1", data);
+  // console.log("data1", data);
   return (
     <Box>
       <Flex direction={"column"}>

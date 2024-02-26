@@ -19,8 +19,10 @@ import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from 'axios'
+import {useNavigate} from 'react-router-dom'
 
 const NewPost = () => {
+  const Navigate = useNavigate()
   const {
     register,
     handleSubmit,
@@ -32,7 +34,7 @@ const NewPost = () => {
 
   const FormSubmitHandler = (data) => {
     // console.log("data: ", data);
-    console.log("errors", errors);
+    // console.log("errors", errors);
     trigger();
     toastHandler();
     PostRequest(data)
@@ -64,6 +66,9 @@ const NewPost = () => {
         progress: undefined,
         theme: "dark",
       });
+      setTimeout(()=>{
+        Navigate('/')
+      },5000)
     } else if (isSubmitted && !isSubmitSuccessful) {
       for (const errorKey in errors) {
         const errorMessage = errors[errorKey]?.message;

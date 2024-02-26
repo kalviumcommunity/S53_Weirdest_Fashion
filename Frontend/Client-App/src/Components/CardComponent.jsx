@@ -31,8 +31,12 @@ const CardComponent = ({ e }) => {
         `https://s53-weirdest-fashion.onrender.com/api/Collections/${e._id}`,
         formData
       );
-      console.log("e._id", e._id);
-      console.log("response", res);
+      // console.log("e._id", e._id);
+      // console.log("response", res);
+    
+      setTimeout(()=>{
+        window.location.reload();
+      },2000)
     } catch (error) {
       console.log("error", error);
     }
@@ -42,12 +46,15 @@ const CardComponent = ({ e }) => {
   const handleDelete = async()=>{
     try {
       const res = await axios.delete( `https://s53-weirdest-fashion.onrender.com/api/Collections/${e._id}`)
-      console.log('Delete-res', res)
-
+      // console.log('Delete-res', res)
+    
     } catch (error) {
       console.log('error', error)
       
     }
+    setTimeout(()=>{
+      window.location.reload();
+    },2000)
   }
 
   return (

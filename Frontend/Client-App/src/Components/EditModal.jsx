@@ -24,11 +24,16 @@ const EditModal = ({ isOpen, onClose, initialData, onSubmit }) => {
         ...prev,
         [name]: value,
     }));
+
   };
   const handleSubmit = () => {
     onSubmit(formData)
-    console.log('formData', formData)
+    // console.log('formData', formData)
     onClose()
+        
+    setTimeout(()=>{
+      window.location.reload();
+    },2000)
   };
   return (
     <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose}>

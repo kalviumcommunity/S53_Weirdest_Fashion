@@ -13,7 +13,7 @@ import { AppContext } from "../Context/ParentContext";
 
 const CardSlider = () => {
   const {data,setData} = useContext(AppContext)
-  console.log('data2', data)
+  // console.log('data2', data)
 
   // const [data,setData] = useState([])
 
@@ -22,13 +22,14 @@ const CardSlider = () => {
     axios
       .get("https://s53-weirdest-fashion.onrender.com/api/Collections")
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setData(res.data);
       })
       .catch((err) => console.log(err));
-  }, []);
-  return (
-    <>
+    }, []);
+    return (
+
+      <>
       <Center
         fontSize={"3xl"}
         as="b"
@@ -42,7 +43,7 @@ const CardSlider = () => {
       {data
         .reverse()
         .map((e, i) => {
-          return <CardComponent e={e} key={i}/>;
+          return <CardComponent e={e} key={i} setData={setData}/>;
         })}
       </Flex>
     </>
