@@ -8,7 +8,7 @@ import {
   Heading,
   Image,
   Input,
-  Link
+  Link,
 } from "@chakra-ui/react";
 import React, { useContext, useEffect } from "react";
 import Navbar from "./Navbar";
@@ -24,20 +24,8 @@ import Logo from "./../assets/Weird-WardrobeLogo.png"; // Importing logo image
 
 const Login = () => {
   const Navigate = useNavigate();
-  const { login, setLogin } = useContext(AppContext);
-  const { signup, setSignup } = useContext(AppContext);
-  
-  const getCookie = (name)=>{
-    const cDecoded = decodeURIComponent(document.cookie)
-    const cArray = cDecoded.split("; ")
-    let result = null;
-    cArray.forEach(elem=>{
-      if(elem.indexOf(name)==0){
-        result= elem.substring(name.length+1)
-      }
-    })
-    return result;
-  }
+  const { login, setLogin, signup, setSignup ,setCookies } = useContext(AppContext);
+  //   console.log(navigator.cookieEnabled)
 
   const {
     register,
@@ -46,13 +34,7 @@ const Login = () => {
     reset,
     trigger,
     formState: { errors, isSubmitting, isSubmitSuccessful, isSubmitted },
-  } = useForm({
-    defaultValues: {
-      userName: getCookie('userName'),
-      Password: getCookie('Password')
-    },
-
-  });
+  } = useForm();
   const FormSubmitHandler = (data) => {
     // console.log("data: ", data);
     // console.log("errors", errors);
@@ -61,22 +43,20 @@ const Login = () => {
     PostRequest(data);
   };
 
-  // const PostRequest = async (data) => {
-  //   try {
-  //     const res = await axios.post("http://localhost:5001/api/Users", {
-  //       ...data,
-  //     });
-  //     setLogin(true);
-  //     console.log("post-response", res);
-  //   } catch (error) {
-  //     console.log("error", error);
-  //   }
-  // };
-
-
-  console.log('userName', getCookie('userName'))
-  console.log('Password', getCookie('Password'))
-
+  const PostRequest = async (data) => {
+    try {
+      const res = await axios.post("http://localhost:5001/api/Users", {
+        ...data,
+      });
+      console.log("res", res);  
+      setLogin(true);
+      setCookies("userName", res.data.postUser.userName, 30);
+      setCookies("Password", res.data.postUser.Password, 30);
+      console.log("post-response", res);
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
 
 
   const toastHandler = () => {
@@ -134,19 +114,11 @@ const Login = () => {
             mt={10}
             borderRadius={12}
             width={"420px"}
-            height={"380px"}
+            height={"470px"}
             backgroundColor={"#ffffffD1"}
             flexDir={"column"}
             p={5}
           >
-            {/* <Center
-              fontSize={"2xl"}
-              as="b"
-              color={Theme.colors.primary[100]}
-              mb={"30px"}
-            >
-              SIGN-IN
-            </Center> */}
             <Image
               src={Logo}
               alt="logo"
@@ -154,17 +126,51 @@ const Login = () => {
               height={"28px"}
               mb={"30px"}
               alignSelf={"center"}
-
             />
 
             <form onSubmit={handleSubmit(FormSubmitHandler)}>
-              <FormControl>
-                <FormControl isInvalid={errors.userName} height={70}>
+              <FormControl mb={5}>
+                <FormControl isInvalid={errors.Name} height={50} mb={5}>
+                  <Input
+                    focusBorderColor={Theme.colors.primary[100]}
+                    variant="flushed"
+                    placeholder="Name"
+                    type="text"
+                    {...register("Name", {
+                      required: "Enter Your Name",
+                      minLength: {
+                        value: 3,
+                        message: "Minimum 3 characters required",
+                      },
+                      maxLength: {
+                        value: 20,
+                        message: "Maximum 20 characters allowed",
+                      },
+                    })}
+                  />
+                  <FormErrorMessage>{errors.Name?.message}</FormErrorMessage>
+                </FormControl>
+                <FormControl isInvalid={errors.emailId} height={50} mb={5}>
+                  <Input
+                    focusBorderColor={Theme.colors.primary[100]}
+                    variant="flushed"
+                    placeholder="Email-ID"
+                    type="email"
+                    {...register("emailId", {
+                      required: "Enter Your Email Address",
+                      pattern: {
+                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                        message: "Invalid Email Address",
+                      },
+                    })}
+                  />
+                  <FormErrorMessage>{errors.emailId?.message}</FormErrorMessage>
+                </FormControl>
+                <FormControl isInvalid={errors.userName} height={50} mb={5}>
                   <Input
                     focusBorderColor={Theme.colors.primary[100]}
                     variant="flushed"
                     placeholder="Username"
-                    mb={5}
                     type="text"
                     {...register("userName", {
                       required: "Enter your userName",
@@ -182,12 +188,11 @@ const Login = () => {
                     {errors.userName?.message}
                   </FormErrorMessage>
                 </FormControl>
-                <FormControl isInvalid={errors.Password} height={70}>
+                <FormControl isInvalid={errors.Password} height={50} mb={5}>
                   <Input
                     focusBorderColor={Theme.colors.primary[100]}
                     variant="flushed"
                     placeholder="Password"
-                    mb={5}
                     type="password"
                     {...register("Password", {
                       required: "Enter your Password",
@@ -217,12 +222,14 @@ const Login = () => {
                     fontSize={12}
                     type="submit"
                   >
-                    LOGIN
+                    Sign Up
                   </Button>
                 </Flex>
-                <Flex justifyContent={'center'} gap={2} mt={5}>
-                  <Center>Don't have an account?</Center>
-                  <Link href={"/signup"} color={Theme.colors.primary[200]}>Sign up</Link>
+                <Flex justifyContent={"center"} gap={2} mt={3}>
+                  <Center>Already have an account?</Center>
+                  <Link href={"/login"} color={Theme.colors.primary[200]}>
+                    Login
+                  </Link>
                 </Flex>
               </FormControl>
             </form>
