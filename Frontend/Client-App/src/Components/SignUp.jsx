@@ -5,7 +5,6 @@ import {
   Flex,
   FormControl,
   FormErrorMessage,
-  Heading,
   Image,
   Input,
   Link,
@@ -24,8 +23,8 @@ import Logo from "./../assets/Weird-WardrobeLogo.png"; // Importing logo image
 
 const Login = () => {
   const Navigate = useNavigate();
-  const { login, setLogin, signup, setSignup ,setCookies } = useContext(AppContext);
-  //   console.log(navigator.cookieEnabled)
+  const { login, setLogin, signup, setSignup, setCookies } =
+    useContext(AppContext);
 
   const {
     register,
@@ -36,8 +35,6 @@ const Login = () => {
     formState: { errors, isSubmitting, isSubmitSuccessful, isSubmitted },
   } = useForm();
   const FormSubmitHandler = (data) => {
-    // console.log("data: ", data);
-    // console.log("errors", errors);
     trigger();
     toastHandler();
     PostRequest(data);
@@ -48,17 +45,15 @@ const Login = () => {
       const res = await axios.post("http://localhost:5001/api/Users", {
         ...data,
       });
-      console.log("res", res);  
       setLogin(true);
-      setCookies("userName", res.data.postUser.userName, 30);
+
+      const access = res.data.access_token;
+      setCookies("userName", access, 30);
       setCookies("Password", res.data.postUser.Password, 30);
-      
-      console.log("post-response", res);
     } catch (error) {
       console.log("error", error);
     }
   };
-
 
   const toastHandler = () => {
     if (isSubmitted && isSubmitSuccessful) {
@@ -89,7 +84,6 @@ const Login = () => {
             progress: undefined,
             theme: "dark",
           });
-          // console.log("errorKey", errorKey);
         }
       }
     }

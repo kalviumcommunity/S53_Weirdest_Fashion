@@ -5,7 +5,7 @@ import { AppContext } from "../Context/ParentContext";
 import CardComponent from "./CardComponent";
 
 const RecentlyAdded = () => {
-  const { data, setData } = useContext(AppContext);
+  const { data} = useContext(AppContext);
 
   console.log("data1", data);
   return (

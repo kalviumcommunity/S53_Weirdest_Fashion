@@ -4,25 +4,15 @@ import Theme from "./Theme";
 import CardComponent from "./CardComponent";
 import axios from "axios";
 import { AppContext } from "../Context/ParentContext";
-// import Slider from "react-slick";
-// import 'slick-carousel/slick/slick.css';
-// import 'slick-carousel/slick/slick-theme.css';
-// import Card2 from "./../assets/Card2.jpg";
-
-// console.log(import.meta.env);
 
 const CardSlider = () => {
   const {data,setData} = useContext(AppContext)
-  // console.log('data2', data)
-
-  // const [data,setData] = useState([])
 
 
   useEffect(() => {
     axios
       .get("https://s53-weirdest-fashion.onrender.com/api/Collections")
       .then((res) => {
-        // console.log(res.data);
         setData(res.data);
       })
       .catch((err) => console.log(err));
