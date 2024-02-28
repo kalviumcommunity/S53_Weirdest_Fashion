@@ -52,6 +52,7 @@ const Login = () => {
       setLogin(true);
       setCookies("userName", res.data.postUser.userName, 30);
       setCookies("Password", res.data.postUser.Password, 30);
+      
       console.log("post-response", res);
     } catch (error) {
       console.log("error", error);
