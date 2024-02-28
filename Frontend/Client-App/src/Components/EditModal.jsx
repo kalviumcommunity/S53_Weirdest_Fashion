@@ -28,7 +28,6 @@ const EditModal = ({ isOpen, onClose, initialData, onSubmit }) => {
   };
   const handleSubmit = () => {
     onSubmit(formData)
-    // console.log('formData', formData)
     onClose()
         
     setTimeout(()=>{

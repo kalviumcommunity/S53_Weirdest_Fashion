@@ -25,7 +25,6 @@ const Login = () => {
   const Navigate = useNavigate();
   const { login, setLogin, signup, setSignup, setCookies } =
     useContext(AppContext);
-  //   console.log(navigator.cookieEnabled)
 
   const {
     register,
@@ -36,8 +35,6 @@ const Login = () => {
     formState: { errors, isSubmitting, isSubmitSuccessful, isSubmitted },
   } = useForm();
   const FormSubmitHandler = (data) => {
-    // console.log("data: ", data);
-    // console.log("errors", errors);
     trigger();
     toastHandler();
     PostRequest(data);
@@ -48,7 +45,6 @@ const Login = () => {
       const res = await axios.post("http://localhost:5001/api/Users", {
         ...data,
       });
-      // console.log("response", res);
       setLogin(true);
 
       const access = res.data.access_token;
@@ -88,7 +84,6 @@ const Login = () => {
             progress: undefined,
             theme: "dark",
           });
-          // console.log("errorKey", errorKey);
         }
       }
     }

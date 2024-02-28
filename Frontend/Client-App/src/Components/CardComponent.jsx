@@ -31,31 +31,27 @@ const CardComponent = ({ e }) => {
         `https://s53-weirdest-fashion.onrender.com/api/Collections/${e._id}`,
         formData
       );
-      // console.log("e._id", e._id);
-      // console.log("response", res);
-    
-      setTimeout(()=>{
+
+      setTimeout(() => {
         window.location.reload();
-      },2000)
+      }, 2000);
     } catch (error) {
       console.log("error", error);
     }
   };
 
-
-  const handleDelete = async()=>{
+  const handleDelete = async () => {
     try {
-      const res = await axios.delete( `https://s53-weirdest-fashion.onrender.com/api/Collections/${e._id}`)
-      // console.log('Delete-res', res)
-    
+      const res = await axios.delete(
+        `https://s53-weirdest-fashion.onrender.com/api/Collections/${e._id}`
+      );
     } catch (error) {
-      console.log('error', error)
-      
+      console.log("error", error);
     }
-    setTimeout(()=>{
+    setTimeout(() => {
       window.location.reload();
-    },2000)
-  }
+    }, 2000);
+  };
 
   return (
     <Box>
@@ -103,7 +99,13 @@ const CardComponent = ({ e }) => {
                   mr={2}
                   onClick={onOpen}
                 />
-                <Image src={Delete} alt="Delete" w={4} h={5} onClick={handleDelete}/>
+                <Image
+                  src={Delete}
+                  alt="Delete"
+                  w={4}
+                  h={5}
+                  onClick={handleDelete}
+                />
               </Flex>
             </Flex>
             <Flex

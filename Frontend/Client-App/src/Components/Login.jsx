@@ -45,23 +45,13 @@ const Login = () => {
     reset,
     trigger,
     formState: { errors, isSubmitting, isSubmitSuccessful, isSubmitted },
-  } = useForm(
-    // {
-    // defaultValues: {
-    //   userName: getCookie('userName'),
-    //   Password: getCookie('Password')
-    // }}
-  );
+  } = useForm();
   const FormSubmitHandler = (data) => {
     console.log("data: ", data);
-    // console.log("errors", errors);
     trigger();
     toastHandler();
   };
-
-  // console.log('userName', getCookie('userName'))
-  // console.log('Password', getCookie('Password'))
-
+  
   const toastHandler = () => {
     if (isSubmitted && isSubmitSuccessful) {
       toast.success("Form Submitted Successfully", {

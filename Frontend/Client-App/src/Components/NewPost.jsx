@@ -33,8 +33,6 @@ const NewPost = () => {
   } = useForm();
 
   const FormSubmitHandler = (data) => {
-    // console.log("data: ", data);
-    // console.log("errors", errors);
     trigger();
     toastHandler();
     PostRequest(data)
@@ -46,7 +44,6 @@ const NewPost = () => {
       const res = await axios.post('https://s53-weirdest-fashion.onrender.com/api/Collections',{
         ...data,
       })
-      // console.log('post-response', res)
     } catch (error) {
       console.log('error', error)
       
@@ -83,7 +80,6 @@ const NewPost = () => {
             progress: undefined,
             theme: "dark",
           });
-          // console.log("errorKey", errorKey);
         }
       }
     }
