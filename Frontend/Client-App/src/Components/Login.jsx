@@ -25,7 +25,6 @@ import Logo from "./../assets/Weird-WardrobeLogo.png"; // Importing logo image
 const Login = () => {
   const Navigate = useNavigate();
   const { login, setLogin } = useContext(AppContext);
-  const { signup, setSignup } = useContext(AppContext);
   
   const getCookie = (name)=>{
     const cDecoded = decodeURIComponent(document.cookie)
@@ -46,38 +45,22 @@ const Login = () => {
     reset,
     trigger,
     formState: { errors, isSubmitting, isSubmitSuccessful, isSubmitted },
-  } = useForm({
-    defaultValues: {
-      userName: getCookie('userName'),
-      Password: getCookie('Password')
-    },
-
-  });
+  } = useForm(
+    // {
+    // defaultValues: {
+    //   userName: getCookie('userName'),
+    //   Password: getCookie('Password')
+    // }}
+  );
   const FormSubmitHandler = (data) => {
-    // console.log("data: ", data);
+    console.log("data: ", data);
     // console.log("errors", errors);
     trigger();
     toastHandler();
-    PostRequest(data);
   };
 
-  // const PostRequest = async (data) => {
-  //   try {
-  //     const res = await axios.post("http://localhost:5001/api/Users", {
-  //       ...data,
-  //     });
-  //     setLogin(true);
-  //     console.log("post-response", res);
-  //   } catch (error) {
-  //     console.log("error", error);
-  //   }
-  // };
-
-
-  console.log('userName', getCookie('userName'))
-  console.log('Password', getCookie('Password'))
-
-
+  // console.log('userName', getCookie('userName'))
+  // console.log('Password', getCookie('Password'))
 
   const toastHandler = () => {
     if (isSubmitted && isSubmitSuccessful) {
@@ -139,14 +122,6 @@ const Login = () => {
             flexDir={"column"}
             p={5}
           >
-            {/* <Center
-              fontSize={"2xl"}
-              as="b"
-              color={Theme.colors.primary[100]}
-              mb={"30px"}
-            >
-              SIGN-IN
-            </Center> */}
             <Image
               src={Logo}
               alt="logo"

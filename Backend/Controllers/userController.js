@@ -2,6 +2,8 @@ const { mongo } = require("mongoose");
 const asyncHandler = require("express-async-handler");
 const mongooseUserModel = require("../Models/UserSchema");
 const { UserValidationSchema } = require("../userValidation");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 const getAllUsers = asyncHandler(async (req, res) => {
   try {
@@ -26,6 +28,7 @@ const getOneUser = asyncHandler(async (req, res) => {
   }
 });
 
+
 const AddNewUser = asyncHandler(async (req, res) => {
   try {
     const { error, value } = UserValidationSchema.validate(req.body, {
@@ -37,16 +40,26 @@ const AddNewUser = asyncHandler(async (req, res) => {
       res.status(400).json({ error: allErrors });
     } else {
       const { Name, userName, emailId, Password } = value;
-      
+
       const postUser = await mongooseUserModel.create({
         Name,
         userName,
         emailId,
         Password,
-        Favourites : [],
+        Favourites: [],
       });
-      console.log(postUser);
-      res.status(201).json({ message: "Create User", postUser });
+      const authData = {
+        userName: postUser.userName,
+      };
+      const access_token = jwt.sign(
+        authData.userName,
+        process.env.JWT_SECRET_KEY
+      );
+      console.log("access_token1: ", access_token);
+      res.status(201).json({
+        access_token: access_token,
+        postUser: postUser,
+      });
     }
   } catch (error) {
     console.log("error", error);
@@ -106,4 +119,5 @@ module.exports = {
   updateAllUsers,
   updateOneUser,
   deleteOneUser,
+  AuthenticationToken
 };
