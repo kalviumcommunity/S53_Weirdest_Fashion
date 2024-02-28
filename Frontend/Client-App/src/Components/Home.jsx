@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useRef } from "react";
 import Navbar from "./Navbar";
 import {
   Flex,
@@ -15,8 +15,19 @@ import Theme from "./Theme";
 import Footer from "./Footer";
 import CardSlider from "./CardSlider";
 import RecentlyAdded from "./RecentlyAdded";
+import { AppContext } from "../Context/ParentContext";
+import Login from "./Login";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const { login, setLogin } = useContext(AppContext);
+  const navigate = useNavigate();
+
+  const ref = useRef(null);
+
+  const handleClick = () => {
+    ref.current.scrollIntoView({ behavior: "smooth" });
+  };
   return (
     <div>
       {/* Header section with welcome message */}
@@ -54,6 +65,11 @@ const Home = () => {
           {/* Explore button */}
           <Flex gap={10}>
             <Button
+              onClick={() => {
+                {
+                  login ? handleClick() : navigate("/login");
+                }
+              }}
               as="i"
               backgroundColor="#BE9B85"
               color="white"
@@ -71,7 +87,7 @@ const Home = () => {
                 ),
               }}
             >
-              Explore More...
+              Explore...
             </Button>
           </Flex>
         </Flex>
@@ -103,7 +119,11 @@ const Home = () => {
           weird and wonderful world of fashion.
         </Text>
       </Box>
-      <RecentlyAdded />
+      {login && (
+        <Box mt={"100px"} ref={ref}>
+          <RecentlyAdded />
+        </Box>
+      )}
       <CardSlider />
       <Footer />
     </div>

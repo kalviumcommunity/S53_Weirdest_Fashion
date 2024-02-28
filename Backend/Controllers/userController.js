@@ -36,16 +36,16 @@ const AddNewUser = asyncHandler(async (req, res) => {
       const allErrors = error.details.map((e) => e.message);
       res.status(400).json({ error: allErrors });
     } else {
-      console.log(value);
-      const { Name, userName, emailId, Password, Favorites } = value;
-
+      const { Name, userName, emailId, Password } = value;
+      
       const postUser = await mongooseUserModel.create({
         Name,
         userName,
         emailId,
         Password,
-        Favorites,
+        Favourites : [],
       });
+      console.log(postUser);
       res.status(201).json({ message: "Create User", postUser });
     }
   } catch (error) {
@@ -56,7 +56,7 @@ const AddNewUser = asyncHandler(async (req, res) => {
 
 const updateAllUsers = asyncHandler(async (req, res) => {
   try {
-    const updateUsers = await mongooseUserModel.findByIdandUpdate(
+    const updateUsers = await mongooseUserModel.findByIdAndUpdate(
       req.params.id,
       req.body,
       { new: true }
@@ -70,7 +70,7 @@ const updateAllUsers = asyncHandler(async (req, res) => {
 
 const updateOneUser = asyncHandler(async (req, res) => {
   try {
-    const updateOneUser = await mongooseUserModel.findByIdandUpdate(
+    const updateOneUser = await mongooseUserModel.findByIdAndUpdate(
       req.params.id,
       req.body,
       { new: true }
@@ -86,8 +86,9 @@ const updateOneUser = asyncHandler(async (req, res) => {
 
 const deleteOneUser = asyncHandler(async (req, res) => {
   try {
-    const deleteUser = await mongooseUserModel.findByIdandDelete(req.params.id);
-    if (!deleteUser) {
+    const deleteUser = await mongooseUserModel.findByIdAndDelete(req.params.id);
+    console.log(deleteUser);
+    if (deleteUser) {
       res
         .status(200)
         .json({ message: `Delete User for ${req.params.id}`, deleteUser });

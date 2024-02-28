@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Box, Text, Flex, Image, Link, Button,useColorModeValue } from "@chakra-ui/react";
 import Logo from "./../assets/Weird-WardrobeLogo.png"; // Importing logo image
+import { AppContext } from "../Context/ParentContext";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const {login,setLogin,setCookies} = useContext(AppContext)
+  const navigate = useNavigate()
+  
+  const deleteCookie=(name)=>{
+    setCookies(name,null,null)
+  }
+  
   return (
     <>
       <Flex pt={5} pl={5}>
@@ -22,17 +31,16 @@ const Navbar = () => {
           <Link href={"/newpost"} mr="5">NEW POST</Link>
         </Box>
         {/* Login button */}
-        {/* <Button
-          backgroundColor="#BE9B85"
-          color="white"
-          width={90}
-          height={9}
-          borderRadius={3}
-        >
-          LOGIN
-        </Button> */}
-        {/* #A17272 */}
         <Button
+        onClick={()=>{
+          if(login){
+            setLogin(false)
+            deleteCookie('userName')
+            deleteCookie('Password')
+          } else {
+            navigate('/login');
+          }
+        }}
           color="white"
           bg="#BE9B85"
           borderWidth="2px"
@@ -48,7 +56,7 @@ const Navbar = () => {
             ),
           }}
         >
-          LOGIN
+          {login? "LOGOUT": "LOGIN"}
         </Button>
       </Flex>
     </>

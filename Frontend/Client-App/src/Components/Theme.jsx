@@ -23,6 +23,7 @@ const Theme = extendTheme({
       explore: "Lato", // Custom font for exploration sections
       italian: "Italianno",
       Kota: "Kotta One",
+      Jua: "Jua",
     },
   },
 });
