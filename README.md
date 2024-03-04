@@ -1,5 +1,6 @@
 # ***S53_Weirdest_Fashion***
 
+
 ## *IDEA*
 
 The idea is to have a project named Weirdest Fashion. This will include pretty wild fashion like wearing a dress that looks like a giant bubble or suit shaped like a paper bag. These outfits aren't just strange, they're statements, asking questions about what fashion can be and who gets to decide what's "normal".
@@ -23,4 +24,6 @@ This project will lead you to diving into a crazy closet, leaving you both amaze
 1. JAVASCRIPT
 1. REACT
 
-Deployment Link - https://s53-weirdest-fashion.onrender.com/
+ ## *Backend Deployment Link* - https://s53-weirdest-fashion.onrender.com/
+
+## *Frontend Deployment Link* - https://client-app-murex.vercel.app/
