@@ -1,8 +1,6 @@
 const { mongo } = require("mongoose");
 const mongooseModel = require("../Models/Schema");
 const asyncHandler = require("express-async-handler");
-const DataSchema = require("./../server");
-const { DataValidationSchema } = require("../userValidation");
 
 const getAllCollections = asyncHandler(async (req, res) => {
   try {
@@ -12,7 +10,6 @@ const getAllCollections = asyncHandler(async (req, res) => {
     console.log("error", error);
     res.status(500).json({ message: "Error fetching All Collections" });
   }
-  
 });
 
 const getOneCollection = asyncHandler(async (req, res) => {
