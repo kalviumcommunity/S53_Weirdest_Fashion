@@ -20,9 +20,10 @@ const UserValidationSchema = Joi.object({
 const DataValidationSchema = Joi.object({
   Name: Joi.string().min(3).max(20).required(),
   Event: Joi.string().min(2).max(200).required(),
-  Date_Of_Event: Joi.date().iso().required(),
+  Date_Of_Event: Joi.string().required(),
   Description: Joi.string().min(5).max(3000).required(),
-  Image_Link: Joi.string().uri()
+  Image_Link: Joi.string().uri(),
+  created_by: Joi.string()
 });
 
 module.exports = { UserValidationSchema, DataValidationSchema };

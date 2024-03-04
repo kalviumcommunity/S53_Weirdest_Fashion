@@ -7,6 +7,7 @@ const Theme = extendTheme({
     primary: {
       100: "#BE9B85", // Light shade of primary color
       200: "#A17272", // Darker shade of primary color
+      300: '#D70040'
     },
     secondary: {
       300: "#FFFFFF", // Light shade of secondary color (white)

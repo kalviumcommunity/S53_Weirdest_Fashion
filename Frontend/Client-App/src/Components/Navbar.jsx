@@ -1,17 +1,34 @@
-import React, { useContext } from "react";
-import { Box, Text, Flex, Image, Link, Button,useColorModeValue } from "@chakra-ui/react";
+import React, { useContext, useLayoutEffect, useState } from "react";
+import {
+  Box,
+  Text,
+  Flex,
+  Image,
+  Link,
+  Button,
+  useColorModeValue,
+  Icon,
+} from "@chakra-ui/react";
 import Logo from "./../assets/Weird-WardrobeLogo.png"; // Importing logo image
 import { AppContext } from "../Context/ParentContext";
 import { useNavigate } from "react-router-dom";
+import { SpinnerIcon } from "@chakra-ui/icons";
 
 const Navbar = () => {
-  const {login,setLogin,setCookies} = useContext(AppContext)
-  const navigate = useNavigate()
-  
-  const deleteCookie=(name)=>{
-    setCookies(name,null,null)
-  }
-  
+  const { login, setLogin, setCookies, getCookie } = useContext(AppContext);
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const deleteCookie = (name) => {
+    setCookies(name, null, null);
+  };
+
+  useLayoutEffect(() => {
+    if (getCookie("userName")) {
+      setLogin(true);
+    }
+  }, []);
+
   return (
     <>
       <Flex pt={5} pl={5}>
@@ -24,23 +41,39 @@ const Navbar = () => {
           display={{ base: "none", md: "block" }}
           mt={1}
         >
-          <Link href={"/"} mr="5">HOME</Link>
-          <Link href={"/about"} mr="5">ABOUT US</Link>
-          <Link href={"/contact"} mr="5">CONTACT US</Link>
-          <Link href={"/favourites"} mr="5">FAVOURITES</Link>
-          <Link href={"/newpost"} mr="5">NEW POST</Link>
+          <Link href={"/"} mr="5">
+            HOME
+          </Link>
+          <Link href={"/about"} mr="5">
+            ABOUT US
+          </Link>
+          <Link href={"/contact"} mr="5">
+            CONTACT US
+          </Link>
+          <Link href={"/favourites"} mr="5">
+            FAVOURITES
+          </Link>
+          <Link href={"/newpost"} mr="5">
+            NEW POST
+          </Link>
         </Box>
         {/* Login button */}
         <Button
-        onClick={()=>{
-          if(login){
-            setLogin(false)
-            deleteCookie('userName')
-            deleteCookie('Password')
-          } else {
-            navigate('/login');
-          }
-        }}
+          isLoading={isLoading}
+          onClick={() => {
+            setIsLoading(true);
+            if (login) {
+              setLogin(false);
+              deleteCookie("userName");
+              deleteCookie("Password");
+              deleteCookie("Name");
+            } else {
+              navigate("/login");
+            }
+            setTimeout(() => {
+              setIsLoading(false);
+            }, 2000);
+          }}
           color="white"
           bg="#BE9B85"
           borderWidth="2px"
@@ -56,7 +89,7 @@ const Navbar = () => {
             ),
           }}
         >
-          {login? "LOGOUT": "LOGIN"}
+          {login ? "LOGOUT" : "LOGIN"}
         </Button>
       </Flex>
     </>
