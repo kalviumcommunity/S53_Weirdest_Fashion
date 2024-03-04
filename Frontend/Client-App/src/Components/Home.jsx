@@ -16,7 +16,6 @@ import Footer from "./Footer";
 import CardSlider from "./CardSlider";
 import RecentlyAdded from "./RecentlyAdded";
 import { AppContext } from "../Context/ParentContext";
-import Login from "./Login";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {

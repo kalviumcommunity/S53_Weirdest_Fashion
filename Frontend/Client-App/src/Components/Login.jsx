@@ -8,9 +8,9 @@ import {
   Heading,
   Image,
   Input,
-  Link
+  Link,
 } from "@chakra-ui/react";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import LoginBg from "./../assets/LoginBg.png";
 import Theme from "./Theme";
@@ -24,19 +24,9 @@ import Logo from "./../assets/Weird-WardrobeLogo.png"; // Importing logo image
 
 const Login = () => {
   const Navigate = useNavigate();
-  const { login, setLogin } = useContext(AppContext);
-  
-  const getCookie = (name)=>{
-    const cDecoded = decodeURIComponent(document.cookie)
-    const cArray = cDecoded.split("; ")
-    let result = null;
-    cArray.forEach(elem=>{
-      if(elem.indexOf(name)==0){
-        result= elem.substring(name.length+1)
-      }
-    })
-    return result;
-  }
+  const { login, setLogin, errorMessage, setErrorMessage, setCookies } =
+    useContext(AppContext);
+  const [data, setData] = useState({ username: "", password: "" });
 
   const {
     register,
@@ -46,28 +36,52 @@ const Login = () => {
     trigger,
     formState: { errors, isSubmitting, isSubmitSuccessful, isSubmitted },
   } = useForm();
-  const FormSubmitHandler = (data) => {
-    console.log("data: ", data);
+  const FormSubmitHandler = (formData) => {
+    setData(formData);
     trigger();
-    toastHandler();
+    ErrorToastHandler();
+    PostRequest(formData);
   };
-  
-  const toastHandler = () => {
-    if (isSubmitted && isSubmitSuccessful) {
-      toast.success("Form Submitted Successfully", {
-        position: "top-center",
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
+
+  const PostRequest = async (data) => {
+    try {
+      const res = await axios.post("http://localhost:5001/api/Users/login", {
+        ...data,
       });
-      setTimeout(() => {
-        Navigate("/");
-      }, 5000);
-    } else if (isSubmitted && !isSubmitSuccessful) {
+      setLogin(true);
+      SuccessToastHandler();
+      const access = res.data.access_token;
+
+      setCookies("userName", access, 30);
+      setCookies("Password", res.data.user.Password, 30);
+      setCookies("Name", res.data.user.Name, 30);
+    } catch (error) {
+      console.log("error", error);
+      if (error.response && error.response.status === 400) {
+        setErrorMessage(error.response.data);
+      } else {
+        setErrorMessage("An error occurred. Please try again later.");
+      }
+    }
+  };
+
+  const SuccessToastHandler = () => {
+    toast.success("Logged In Successfully", {
+      position: "top-center",
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+    setTimeout(() => {
+      Navigate("/");
+    }, 5000);
+  };
+  const ErrorToastHandler = () => {
+    if (isSubmitted && !isSubmitSuccessful) {
       for (const errorKey in errors) {
         const errorMessage = errors[errorKey]?.message;
         if (errorMessage) {
@@ -81,16 +95,14 @@ const Login = () => {
             progress: undefined,
             theme: "dark",
           });
-          // console.log("errorKey", errorKey);
         }
       }
     }
   };
 
   useEffect(() => {
-    toastHandler();
+    ErrorToastHandler();
   }, [isSubmitted]);
-
   return (
     <Box>
       <ToastContainer />
@@ -119,7 +131,6 @@ const Login = () => {
               height={"28px"}
               mb={"30px"}
               alignSelf={"center"}
-
             />
 
             <form onSubmit={handleSubmit(FormSubmitHandler)}>
@@ -171,7 +182,13 @@ const Login = () => {
                     {errors.Password?.message}
                   </FormErrorMessage>
                 </FormControl>
-                <Flex justifyContent={"center"}>
+                <Flex justifyContent={"center"} gap={3} flexDir={"column"}>
+                  <Flex
+                    justifyContent={"center"}
+                    color={Theme.colors.primary[300]}
+                  >
+                    {errorMessage && <Center>{errorMessage}</Center>}
+                  </Flex>
                   <Button
                     bgColor={Theme.colors.primary[100]}
                     color={"white"}
@@ -180,14 +197,17 @@ const Login = () => {
                     px={8}
                     py={5}
                     fontSize={12}
+                    mx={"auto"}
                     type="submit"
                   >
                     LOGIN
                   </Button>
                 </Flex>
-                <Flex justifyContent={'center'} gap={2} mt={5}>
+                <Flex justifyContent={"center"} gap={2} mt={5}>
                   <Center>Don't have an account?</Center>
-                  <Link href={"/signup"} color={Theme.colors.primary[200]}>Sign up</Link>
+                  <Link href={"/signup"} color={Theme.colors.primary[200]}>
+                    Sign up
+                  </Link>
                 </Flex>
               </FormControl>
             </form>

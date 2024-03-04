@@ -10,7 +10,7 @@ import {
   Textarea,
   useToast,
 } from "@chakra-ui/react";
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import Navbar from "./Navbar";
 import PostBackground from "./../assets/NewPostBg.png";
 import Title from "./../assets/AddNewCollection.png";
@@ -20,8 +20,11 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from 'axios'
 import {useNavigate} from 'react-router-dom'
+import { AppContext } from "../Context/ParentContext";
 
 const NewPost = () => {
+  
+  const {getCookie} = useContext(AppContext)
   const Navigate = useNavigate()
   const {
     register,
@@ -39,10 +42,13 @@ const NewPost = () => {
 
   };
 
+const created_by = getCookie('Name')
+
   const PostRequest = async (data)=>{
     try {
-      const res = await axios.post('https://s53-weirdest-fashion.onrender.com/api/Collections',{
+      const res = await axios.post('http://localhost:5001/api/Collections',{
         ...data,
+        created_by
       })
     } catch (error) {
       console.log('error', error)
