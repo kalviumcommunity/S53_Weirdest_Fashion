@@ -4,11 +4,10 @@ export const AppContext = createContext();
 
 const ParentContext = ({ children }) => {
   const [data, setData] = useState([]);
-  const [user, setUser] = useState([]);
   const [login, setLogin] = useState(false);
   const [signup, setSignup] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [value,setValue] = useState('')
+  console.log("local", localStorage.setItem("login", login));
+  console.log("local", localStorage.getItem("login"));
 
   const setCookies = (name, value, expiry) => {
     const date = new Date();
@@ -17,35 +16,8 @@ const ParentContext = ({ children }) => {
     document.cookie = `${name}=${value}; ${expires}; path=/`;
   };
 
-  const getCookie = (name) => {
-    const cDecoded = decodeURIComponent(document.cookie);
-    const cArray = cDecoded.split("; ");
-    let result = null;
-    cArray.forEach((elem) => {
-      if (elem.indexOf(name) == 0) {
-        result = elem.substring(name.length + 1);
-      }
-    });
-    return result;
-  };
-
   return (
-    <AppContext.Provider
-      value={{
-        data,
-        setData,
-        login,
-        setLogin,
-        setCookies,
-        errorMessage,
-        setErrorMessage,
-        getCookie,
-        user,
-        setUser,
-        value,
-        setValue
-      }}
-    >
+    <AppContext.Provider value={{ data, setData, login, setLogin, setCookies }}>
       {children}
     </AppContext.Provider>
   );

@@ -20,19 +20,11 @@ import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { AppContext } from "../Context/ParentContext";
 import Logo from "./../assets/Weird-WardrobeLogo.png"; // Importing logo image
-import { ViewIcon } from "@chakra-ui/icons";
 
 const Login = () => {
   const Navigate = useNavigate();
-  const {
-    login,
-    setLogin,
-    signup,
-    setSignup,
-    setCookies,
-    errorMessage,
-    setErrorMessage,
-  } = useContext(AppContext);
+  const { login, setLogin, signup, setSignup, setCookies } =
+    useContext(AppContext);
 
   const {
     register,
@@ -44,49 +36,41 @@ const Login = () => {
   } = useForm();
   const FormSubmitHandler = (data) => {
     trigger();
-    ErrorToastHandler();
+    toastHandler();
     PostRequest(data);
   };
 
   const PostRequest = async (data) => {
     try {
-      const res = await axios.post("http://localhost:5001/api/Users/signup", {
+      const res = await axios.post("http://localhost:5001/api/Users", {
         ...data,
       });
       setLogin(true);
-      SuccessToastHandler();
+
       const access = res.data.access_token;
-      
       setCookies("userName", access, 30);
       setCookies("Password", res.data.postUser.Password, 30);
-      setCookies("Name", res.data.postUser.Name, 30);
     } catch (error) {
       console.log("error", error);
-      if (error.response && error.response.status === 400) {
-        setErrorMessage(error.response.data);
-      } else {
-        setErrorMessage("An error occurred. Please try again later.");
-      }
     }
   };
 
-  const SuccessToastHandler = () => {
-    toast.success("Signed Up Successfully", {
-      position: "top-center",
-      autoClose: 4000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-    });
-    setTimeout(() => {
-      Navigate("/");
-    }, 5000);
-  };
-  const ErrorToastHandler = () => {
-    if (isSubmitted && !isSubmitSuccessful) {
+  const toastHandler = () => {
+    if (isSubmitted && isSubmitSuccessful) {
+      toast.success("Form Submitted Successfully", {
+        position: "top-center",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      setTimeout(() => {
+        Navigate("/");
+      }, 5000);
+    } else if (isSubmitted && !isSubmitSuccessful) {
       for (const errorKey in errors) {
         const errorMessage = errors[errorKey]?.message;
         if (errorMessage) {
@@ -106,7 +90,7 @@ const Login = () => {
   };
 
   useEffect(() => {
-    ErrorToastHandler();
+    toastHandler();
   }, [isSubmitted]);
 
   return (
@@ -125,7 +109,7 @@ const Login = () => {
             mt={10}
             borderRadius={12}
             width={"420px"}
-            height={"490px"}
+            height={"470px"}
             backgroundColor={"#ffffffD1"}
             flexDir={"column"}
             p={5}
@@ -201,7 +185,6 @@ const Login = () => {
                 </FormControl>
                 <FormControl isInvalid={errors.Password} height={50} mb={5}>
                   <Input
-                    icon={<ViewIcon />}
                     focusBorderColor={Theme.colors.primary[100]}
                     variant="flushed"
                     placeholder="Password"
@@ -223,13 +206,7 @@ const Login = () => {
                     {errors.Password?.message}
                   </FormErrorMessage>
                 </FormControl>
-                <Flex justifyContent={"center"} gap={3} flexDir={"column"}>
-                  <Flex
-                    justifyContent={"center"}
-                    color={Theme.colors.primary[300]}
-                  >
-                    {errorMessage && <Center>{errorMessage}</Center>}
-                  </Flex>
+                <Flex justifyContent={"center"}>
                   <Button
                     bgColor={Theme.colors.primary[100]}
                     color={"white"}
@@ -238,13 +215,12 @@ const Login = () => {
                     px={8}
                     py={5}
                     fontSize={12}
-                    mx={"auto"}
                     type="submit"
                   >
                     Sign Up
                   </Button>
                 </Flex>
-                <Flex justifyContent={"center"} gap={2} mt={5}>
+                <Flex justifyContent={"center"} gap={2} mt={3}>
                   <Center>Already have an account?</Center>
                   <Link href={"/login"} color={Theme.colors.primary[200]}>
                     Login

@@ -5,8 +5,7 @@ const collectionSchema = mongoose.Schema({
     "Event": {type: String,required: [true, "Please Add Name of Event"]},
     "Date_Of_Event": {type: String,required: [true, "Please Add Date of Event"]},
     "Description": {type: String,required: [true, "Please Add Description"]},
-    "Image_Link": {type: String,required: [true, "Please Add Image Link"]},
-    "created_by": {type: String}
+    "Image_Link": {type: String,required: [true, "Please Add Image Link"]}
 })
 
 const mongooseModel = mongoose.model("maindatas", collectionSchema)
