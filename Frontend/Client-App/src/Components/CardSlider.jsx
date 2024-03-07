@@ -8,26 +8,26 @@ import { AppContext } from "../Context/ParentContext";
 const CardSlider = () => {
   const { data, setData, user, setUser,value ,setValue,getCookie } = useContext(AppContext);
 
-  const created_by = getCookie('Name')
-
+  
   useEffect(() => {
     axios
     .get("http://localhost:5001/api/Collections")
-      .then((res) => {
-        setData(res.data);
-      })
-      .catch((err) => console.log(err));
-    }, []);
-    
-    useEffect(() => {
-      axios
-      .get("http://localhost:5001/api/Users")
-      .then((res) => {
+    .then((res) => {
+      setData(res.data);
+    })
+    .catch((err) => console.log(err));
+  }, []);
+  
+  useEffect(() => {
+    axios
+    .get("http://localhost:5001/api/Users")
+    .then((res) => {
         setUser(res.data.AllUsers);
       })
       .catch((err) => console.log(err));
     },[]);
-
+    
+    const created_by = getCookie('Name')
     const filteredData = value? data.filter((e) => {
       return e.created_by === value
     }): data;
