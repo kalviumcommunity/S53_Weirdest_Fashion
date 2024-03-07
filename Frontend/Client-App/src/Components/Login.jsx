@@ -48,6 +48,7 @@ const Login = () => {
       const res = await axios.post("http://localhost:5001/api/Users/login", {
         ...data,
       });
+      console.log('res', res)
       setLogin(true);
       SuccessToastHandler();
       const access = res.data.access_token;

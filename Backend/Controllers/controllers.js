@@ -40,7 +40,7 @@ const createCollection = asyncHandler(async (req, res) => {
       res.status(400).json({ error: allErrors });
     } else {
       console.log(value);
-      const { Name, Event, Date_Of_Event, Description, Image_Link } = value;
+      const { Name, Event, Date_Of_Event, Description, Image_Link,created_by } = value;
 
       const postCollection = await mongooseModel.create({
         Name,
@@ -48,6 +48,7 @@ const createCollection = asyncHandler(async (req, res) => {
         Date_Of_Event,
         Description,
         Image_Link,
+        created_by
       });
       res.status(201).json({ message: "Create Collection", postCollection });
     }
