@@ -7,6 +7,7 @@ const { DataValidationSchema } = require("../userValidation");
 const getAllCollections = asyncHandler(async (req, res) => {
   try {
     const AllCollection = await mongooseModel.find({});
+    console.log('AllCollection', AllCollection)
     res.status(200).json(AllCollection);
   } catch (error) {
     console.log("error", error);
