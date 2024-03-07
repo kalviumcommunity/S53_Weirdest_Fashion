@@ -4,8 +4,19 @@ meta {
   seq: 1
 }
 
-get {
-  url: http://localhost:5001/api/Collections
-  body: none
+post {
+  url: http://localhost:3000/ping
+  body: json
   auth: none
+}
+
+body:json {
+  {
+      "Name": "Dianaaaaaa",
+      "Event": "Weirdesta",
+      "Date_Of_Event": "2024-02-12",
+      "Description": "This is also sample data.",
+      "Image_Link": "https://th.bing.com/th/id/OIP._-SysJQ8dfZHhsTOabIegAHaLH?rs=1&pid=ImgDetMain",
+      "created_by": "Varsha Tiwari"
+    }
 }
