@@ -50,7 +50,7 @@ const Login = () => {
 
   const PostRequest = async (data) => {
     try {
-      const res = await axios.post("http://localhost:5001/api/Users/signup", {
+      const res = await axios.post("https://s53-weirdest-fashion.onrender.com/api/Users/signup", {
         ...data,
       });
       setLogin(true);

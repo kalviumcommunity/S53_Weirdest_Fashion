@@ -11,7 +11,7 @@ const CardSlider = () => {
   
   useEffect(() => {
     axios
-    .get("http://localhost:5001/api/Collections")
+    .get("https://s53-weirdest-fashion.onrender.com/api/Collections")
     .then((res) => {
       setData(res.data);
     })
@@ -20,7 +20,7 @@ const CardSlider = () => {
   
   useEffect(() => {
     axios
-    .get("http://localhost:5001/api/Users")
+    .get("https://s53-weirdest-fashion.onrender.com/api/Users")
     .then((res) => {
         setUser(res.data.AllUsers);
       })

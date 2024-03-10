@@ -19,10 +19,11 @@ This project will lead you to diving into a crazy closet, leaving you both amaze
 
 ## *TECHNOLOGIES*
 
-1. HTML
-1. CSS
-1. JAVASCRIPT
-1. REACT
+1. REACT JS
+1. CHAKRA UI
+1. NODE JS
+1. EXPRESS
+1. MONGODB
 
  ## *Backend Deployment Link* - https://s53-weirdest-fashion.onrender.com/
 

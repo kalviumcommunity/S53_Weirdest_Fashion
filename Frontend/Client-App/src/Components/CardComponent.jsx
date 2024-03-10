@@ -28,7 +28,7 @@ const CardComponent = ({ e }) => {
   const handleSubmit = async (formData) => {
     try {
       const res = await axios.put(
-        `http://localhost:5001/api/Collections/${e._id}`,
+        `https://s53-weirdest-fashion.onrender.com/api/Collections/${e._id}`,
         formData
       );
 
@@ -43,7 +43,7 @@ const CardComponent = ({ e }) => {
   const handleDelete = async () => {
     try {
       const res = await axios.delete(
-        `http://localhost:5001/api/Collections/${e._id}`
+        `https://s53-weirdest-fashion.onrender.com/api/Collections/${e._id}`
       );
     } catch (error) {
       console.log("error", error);

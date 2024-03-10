@@ -46,7 +46,7 @@ const created_by = getCookie('Name')
 
   const PostRequest = async (data)=>{
     try {
-      const res = await axios.post('http://localhost:5001/api/Collections',{
+      const res = await axios.post('https://s53-weirdest-fashion.onrender.com/api/Collections',{
         ...data,
         created_by
       })
